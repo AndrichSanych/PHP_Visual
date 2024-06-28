@@ -1,7 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using WebTuchyn.Data;
+using WebTuchyn.Mapper;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<TuchynDbContext>(opt =>
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAutoMapper(typeof(AppMapProfile));
 
 var app = builder.Build();
 
@@ -20,4 +29,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.SeedData();
 app.Run();
