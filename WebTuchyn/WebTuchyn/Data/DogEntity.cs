@@ -12,6 +12,5 @@ namespace WebTuchyn.Data
         public string Name { get; set; } = string.Empty;
         [StringLength(512)]
         public string Image { get; set; } = string.Empty;
-        int a = 0;
     }
 }
